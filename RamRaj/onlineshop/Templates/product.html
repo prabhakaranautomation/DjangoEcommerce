@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<!--  &lt;!&ndash; Navbar &ndash;&gt;-->
+<!--  <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">-->
+<!--    <div class="container">-->
+
+<!--      &lt;!&ndash; Brand &ndash;&gt;-->
+<!--      <a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">-->
+<!--        <strong class="blue-text">MDB</strong>-->
+<!--      </a>-->
+
+<!--      &lt;!&ndash; Collapse &ndash;&gt;-->
+<!--      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"-->
+<!--        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--      </button>-->
+
+<!--      &lt;!&ndash; Links &ndash;&gt;-->
+<!--      <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+
+<!--        &lt;!&ndash; Left &ndash;&gt;-->
+<!--        <ul class="navbar-nav mr-auto">-->
+<!--          <li class="nav-item active">-->
+<!--            <a class="nav-link waves-effect" href="#">Home-->
+<!--              <span class="sr-only">(current)</span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">About MDB</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/getting-started/download/"-->
+<!--              target="_blank">Free download</a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Free-->
+<!--              tutorials</a>-->
+<!--          </li>-->
+<!--        </ul>-->
+
+<!--        &lt;!&ndash; Right &ndash;&gt;-->
+<!--        <ul class="navbar-nav nav-flex-icons">-->
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link waves-effect">-->
+<!--              <span class="badge red z-depth-1 mr-1"> 1 </span>-->
+<!--              <i class="fas fa-shopping-cart"></i>-->
+<!--              <span class="clearfix d-none d-sm-inline-block"> Cart </span>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">-->
+<!--              <i class="fab fa-facebook-f"></i>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a href="https://twitter.com/MDBootstrap" class="nav-link waves-effect" target="_blank">-->
+<!--              <i class="fab fa-twitter"></i>-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="nav-item">-->
+<!--            <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link border border-light rounded waves-effect"-->
+<!--              target="_blank">-->
+<!--              <i class="fab fa-github mr-2"></i>MDB GitHub-->
+<!--            </a>-->
+<!--          </li>-->
+<!--        </ul>-->
+
+<!--      </div>-->
+
+<!--    </div>-->
+<!--  </nav>-->
+<!--  &lt;!&ndash; Navbar &ndash;&gt;-->
+  {% include "navbar.html" %}
+
+  <!--Main layout-->
+  <main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+<!--          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg" class="img-fluid" alt="">-->
+
+          <div id="img-container">
+            <div id="lens1"></div>
+            <img id="featured" src="{{ item.image.url}}" class="img-fluid" alt="">
+          </div>
+          <div id="slide-wrapper">
+            <img id="slideLeft" class="arrow" src="">
+              <div id="slider">
+                <img class="thumbnail active" src="{{ item.image.url}}">
+                <img class="thumbnail" src="/media/71jLoKIpXKL._AC_AA180_.jpg">
+                <img class="thumbnail" src="{{ item.image.url}}">
+              </div>
+            <img id="slideRight" class="arrow" src="">
+          </div>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+          <div id="lens"></div>
+          <!--Content-->
+          <div class="p-4">
+
+            <div class="mb-3">
+              <a href="">
+                <span class="badge purple mr-1">{{ object.get_category_display }}</span>
+              </a>
+              <a href="">
+                <span class="badge {{ item.get_label_display }}-color mr-1">New</span>
+              </a>
+              <a href="">
+                <span class="badge red mr-1">Bestseller</span>
+              </a>
+            </div>
+
+            <p class="lead">
+              {% if object.discount_price %}
+              <span class="mr-1">
+                <del>${{ object.price }}</del>
+              </span>
+              <span>${{ object.discount_price }}</span>
+              {% else %}
+              <span>${{ object.price }}</span>
+              {% endif %}
+            </p>
+
+            <p class="lead font-weight-bold">Description</p>
+
+            <p>{{ object.description }}</p>
+
+            {% comment %}<form class="d-flex justify-content-left">
+              <!-- Default input -->
+              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+              <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
+                <i class="fas fa-shopping-cart ml-1"></i>
+              </button>
+            </form>{% endcomment %}
+
+            <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p" >
+              Add to cart
+                <i class="fas fa-shopping-cart ml-1"></i>
+            </a>
+            <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p" >
+              Remove from cart
+            </a>
+          </div>
+          <!--Content-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <hr>
+
+      <!--Grid row-->
+      <div class="row d-flex justify-content-center wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 text-center">
+
+          <h4 class="my-4 h4">Additional information</h4>
+
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
+            voluptates,
+            quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-6 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+{% endblock content %}
